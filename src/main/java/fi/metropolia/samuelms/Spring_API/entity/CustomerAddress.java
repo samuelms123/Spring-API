@@ -21,7 +21,7 @@ public class CustomerAddress {
     @Column
     private String country;
 
-    @ManyToOne
+    @OneToOne
     Customer customer;
 
     public CustomerAddress() {}
