@@ -1,7 +1,7 @@
 package fi.metropolia.samuelms.Spring_API.controllers;
 
-import fi.metropolia.samuelms.Spring_API.entity.Customer;
-import fi.metropolia.samuelms.Spring_API.repositories.CustomerRepository;
+import fi.metropolia.samuelms.Spring_API.dto.CustomerDto;
+import fi.metropolia.samuelms.Spring_API.services.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Integer id) {
-        return customerRepository.findById(id)
-                .map(customer -> ResponseEntity.ok(customer))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Integer id) {
+        CustomerDto customerDto = customerService.getCustomerById(id);
+        return ResponseEntity.ok(customerDto);
     }
 }

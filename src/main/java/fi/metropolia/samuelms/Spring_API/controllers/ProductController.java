@@ -1,46 +1,35 @@
 package fi.metropolia.samuelms.Spring_API.controllers;
 
-
-import fi.metropolia.samuelms.Spring_API.entity.Category;
-import fi.metropolia.samuelms.Spring_API.entity.Product;
+import fi.metropolia.samuelms.Spring_API.dto.ProductDto;
+import fi.metropolia.samuelms.Spring_API.entities.Category;
+import fi.metropolia.samuelms.Spring_API.entities.Product;
+import fi.metropolia.samuelms.Spring_API.exceptions.ResourceNotFoundException;
 import fi.metropolia.samuelms.Spring_API.repositories.CategoryRepository;
 import fi.metropolia.samuelms.Spring_API.repositories.ProductRepository;
+import fi.metropolia.samuelms.Spring_API.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository) {
-        this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
-
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
-        return productRepository.findById(id)
-                .map(product -> ResponseEntity.ok(product))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Integer id) {
+        ProductDto dto = productService.getProductById(id);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping()
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        if (product.getCategory() != null && product.getCategory().getId() != null) {
-            Category category = categoryRepository.findById(product.getCategory().getId()).orElse(null);
-            if (category == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category not found");
-            }
-            product.setCategory(category);
-        }
-
-        Product savedProduct = productRepository.save(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+    public ResponseEntity<ProductDto> createProduct(@RequestBody Product product) {
+        ProductDto dto = productService.createProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 }

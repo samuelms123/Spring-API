@@ -1,4 +1,4 @@
-package fi.metropolia.samuelms.Spring_API.entity;
+package fi.metropolia.samuelms.Spring_API.entities;
 
 import jakarta.persistence.*;
 
@@ -31,6 +31,13 @@ public class Product {
     // TODO: Add supplier also (defaults to NULL so can leave empty)
 
     public Product() {}
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

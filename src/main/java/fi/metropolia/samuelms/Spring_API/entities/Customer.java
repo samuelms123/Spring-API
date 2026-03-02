@@ -1,4 +1,4 @@
-package fi.metropolia.samuelms.Spring_API.entity;
+package fi.metropolia.samuelms.Spring_API.entities;
 
 import jakarta.persistence.*;
 
