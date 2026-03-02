@@ -1,11 +1,14 @@
 package fi.metropolia.samuelms.Spring_API.dto;
 
+import fi.metropolia.samuelms.Spring_API.entities.Customer;
+
 public class CustomerAddressDto {
     private Integer id;
     private String address;
     private String postalCode;
     private String city;
     private String country;
+    private Customer customer;
 
     public Integer getId() {
         return id;
@@ -36,5 +39,12 @@ public class CustomerAddressDto {
     }
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

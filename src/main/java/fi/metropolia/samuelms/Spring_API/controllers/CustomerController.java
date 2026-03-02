@@ -18,8 +18,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Integer id) {
-        CustomerDto customerDto = customerService.getCustomerById(id);
+    public ResponseEntity<CustomerDto> getDetailedCustomerById(@PathVariable Integer id) {
+        CustomerDto customerDto = customerService.getDetailedCustomerById(id);
         return ResponseEntity.ok(customerDto);
     }
 }

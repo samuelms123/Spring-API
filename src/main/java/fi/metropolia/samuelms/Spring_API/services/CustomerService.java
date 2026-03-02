@@ -15,7 +15,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public CustomerDto getCustomerById(Integer id) {
+    public CustomerDto getDetailedCustomerById(Integer id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
         return mapToDto(customer);

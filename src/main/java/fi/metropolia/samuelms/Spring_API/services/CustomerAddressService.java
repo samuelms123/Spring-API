@@ -29,6 +29,7 @@ public class CustomerAddressService {
         dto.setCity(customerAddress.getCity());
         dto.setPostalCode(customerAddress.getPostalCode());
         dto.setCountry(customerAddress.getCountry());
+        dto.setCustomer(customerAddress.getCustomer());
         return dto;
     }
 

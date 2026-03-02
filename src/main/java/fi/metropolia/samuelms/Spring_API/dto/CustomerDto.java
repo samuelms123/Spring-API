@@ -1,9 +1,8 @@
 package fi.metropolia.samuelms.Spring_API.dto;
 
-public class CustomerDto {
+import fi.metropolia.samuelms.Spring_API.entities.CustomerAddress;
 
-    public CustomerDto() {
-    }
+public class CustomerDto {
 
     private int id;
     private String firstName;
