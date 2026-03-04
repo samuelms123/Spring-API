@@ -8,6 +8,9 @@ import fi.metropolia.samuelms.Spring_API.repositories.CategoryRepository;
 import fi.metropolia.samuelms.Spring_API.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -23,6 +26,24 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         return mapToDto(product);
+    }
+
+    public List<ProductDto> getAllProductsLike(String keyword) {
+        List<Product> products = productRepository.findProductsByKeyword(keyword);
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (Product product : products) {
+            productDtos.add(mapToDto(product));
+        }
+        return productDtos;
+    }
+
+    public List<ProductDto> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (Product product : products) {
+            productDtos.add(mapToDto(product));
+        }
+        return productDtos;
     }
 
     public ProductDto createProduct(Product product) {

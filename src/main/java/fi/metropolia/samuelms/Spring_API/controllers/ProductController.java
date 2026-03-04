@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -25,6 +27,21 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProductById(@PathVariable Integer id) {
         ProductDto dto = productService.getProductById(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getProducts(
+            @RequestParam(required = false) String search) {
+
+        if (search != null) {
+            return ResponseEntity.ok(
+                    productService.getAllProductsLike(search)
+            );
+        }
+
+        return ResponseEntity.ok(
+                productService.getAllProducts()
+        );
     }
 
     @PostMapping()

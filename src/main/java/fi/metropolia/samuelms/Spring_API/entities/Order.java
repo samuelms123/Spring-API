@@ -11,6 +11,7 @@ public class Order {
     // TODO: Add customer ref
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "order_date")
