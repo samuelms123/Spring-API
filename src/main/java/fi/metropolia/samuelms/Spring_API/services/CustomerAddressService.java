@@ -1,7 +1,6 @@
 package fi.metropolia.samuelms.Spring_API.services;
 
 import fi.metropolia.samuelms.Spring_API.dto.CustomerAddressDto;
-import fi.metropolia.samuelms.Spring_API.entities.Category;
 import fi.metropolia.samuelms.Spring_API.entities.CustomerAddress;
 import fi.metropolia.samuelms.Spring_API.exceptions.ResourceNotFoundException;
 import fi.metropolia.samuelms.Spring_API.repositories.CustomerAddressRepository;

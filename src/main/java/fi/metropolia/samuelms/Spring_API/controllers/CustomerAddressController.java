@@ -1,8 +1,6 @@
 package fi.metropolia.samuelms.Spring_API.controllers;
 
 import fi.metropolia.samuelms.Spring_API.dto.CustomerAddressDto;
-import fi.metropolia.samuelms.Spring_API.entities.CustomerAddress;
-import fi.metropolia.samuelms.Spring_API.repositories.CustomerAddressRepository;
 import fi.metropolia.samuelms.Spring_API.services.CustomerAddressService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

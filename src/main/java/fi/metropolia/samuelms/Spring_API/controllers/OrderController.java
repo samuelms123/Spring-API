@@ -1,8 +1,6 @@
 package fi.metropolia.samuelms.Spring_API.controllers;
 
 import fi.metropolia.samuelms.Spring_API.dto.OrderDto;
-import fi.metropolia.samuelms.Spring_API.entities.Order;
-import fi.metropolia.samuelms.Spring_API.repositories.OrderRepository;
 import fi.metropolia.samuelms.Spring_API.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
