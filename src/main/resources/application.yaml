@@ -1,4 +1,7 @@
 spring:
+  data:
+    rest:
+      basePath: /api
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}
@@ -11,3 +14,5 @@ spring:
 
   application:
     name: Spring-API
+
+

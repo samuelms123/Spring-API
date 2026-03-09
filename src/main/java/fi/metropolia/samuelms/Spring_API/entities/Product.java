@@ -1,6 +1,8 @@
 package fi.metropolia.samuelms.Spring_API.entities;
 
+import fi.metropolia.samuelms.Spring_API.converters.BigDecimalDoubleConverter;
 import jakarta.persistence.*;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import java.math.BigDecimal;
 
@@ -18,8 +20,9 @@ public class Product {
     @Column
     private String description;
 
+    @Convert(converter = BigDecimalDoubleConverter.class)
     @Column
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "stock_quantity")
     private Integer stockQuantity;
@@ -55,11 +58,11 @@ public class Product {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
