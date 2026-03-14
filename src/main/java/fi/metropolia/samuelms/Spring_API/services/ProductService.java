@@ -6,6 +6,7 @@ import fi.metropolia.samuelms.Spring_API.entities.Product;
 import fi.metropolia.samuelms.Spring_API.exceptions.ResourceNotFoundException;
 import fi.metropolia.samuelms.Spring_API.repositories.CategoryRepository;
 import fi.metropolia.samuelms.Spring_API.repositories.ProductRepository;
+import fi.metropolia.samuelms.Spring_API.utils.ProductMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,14 +26,14 @@ public class ProductService {
     public ProductDto getProductById(Integer id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        return mapToDto(product);
+        return ProductMapper.toDto(product);
     }
 
     public List<ProductDto> getAllProductsLike(String keyword) {
         List<Product> products = productRepository.findProductsByKeyword(keyword);
         List<ProductDto> productDtos = new ArrayList<>();
         for (Product product : products) {
-            productDtos.add(mapToDto(product));
+            productDtos.add(ProductMapper.toDto(product));
         }
         return productDtos;
     }
@@ -41,7 +42,7 @@ public class ProductService {
         List<Product> products = productRepository.findAll();
         List<ProductDto> productDtos = new ArrayList<>();
         for (Product product : products) {
-            productDtos.add(mapToDto(product));
+            productDtos.add(ProductMapper.toDto(product));
         }
         return productDtos;
     }
@@ -56,17 +57,6 @@ public class ProductService {
 
         product.setCategory(category);
         Product savedProduct = productRepository.save(product);
-        return mapToDto(savedProduct);
-    }
-
-    private ProductDto mapToDto(Product product) {
-        ProductDto dto = new ProductDto();
-        dto.setId(product.getId());
-        dto.setName(product.getName());
-        dto.setDescription(product.getDescription());
-        dto.setStockQuantity(product.getStockQuantity());
-        dto.setPrice(product.getPrice());
-        dto.setCategory(product.getCategory());
-        return dto;
+        return ProductMapper.toDto(savedProduct);
     }
 }

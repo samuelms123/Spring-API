@@ -8,6 +8,8 @@ public class OrderDto {
     private Date orderDate;
     private Date deliveryDate;
     private String status;
+    private CustomerDto customer;
+    private CustomerAddressDto customerAddress;
 
     public Integer getId() {
         return id;
@@ -32,6 +34,19 @@ public class OrderDto {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public CustomerDto getCustomer() {
+        return customer;
+    }
+    public void setCustomer(CustomerDto customer) {
+        this.customer = customer;
+    }
+    public CustomerAddressDto getCustomerAddress() {
+        return customerAddress;
+    }
+    public void setCustomerAddress(CustomerAddressDto customerAddress) {
+        this.customerAddress = customerAddress;
     }
 
 }

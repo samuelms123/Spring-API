@@ -4,6 +4,7 @@ import fi.metropolia.samuelms.Spring_API.dto.CustomerDto;
 import fi.metropolia.samuelms.Spring_API.entities.Customer;
 import fi.metropolia.samuelms.Spring_API.exceptions.ResourceNotFoundException;
 import fi.metropolia.samuelms.Spring_API.repositories.CustomerRepository;
+import fi.metropolia.samuelms.Spring_API.utils.CustomerMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,12 +19,12 @@ public class CustomerService {
     public CustomerDto getDetailedCustomerById(Integer id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
-        return mapToDto(customer);
+        return CustomerMapper.toDto(customer);
     }
 
     public CustomerDto createCustomer(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
-        return mapToDto(savedCustomer);
+        return CustomerMapper.toDto(savedCustomer);
     }
 
     public CustomerDto updateCustomer(Integer id, CustomerDto dto) {
@@ -49,7 +50,7 @@ public class CustomerService {
 
         Customer savedCustomer = customerRepository.save(customer);
 
-        return mapToDto(savedCustomer);
+        return CustomerMapper.toDto(savedCustomer);
     }
 
     public void deleteCustomer(Integer id) {
@@ -57,14 +58,5 @@ public class CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
 
         customerRepository.deleteById(customer.getId());
-    }
-
-    private CustomerDto mapToDto(Customer customer) {
-        CustomerDto customerDto = new CustomerDto();
-        customerDto.setId(customer.getId());
-        customerDto.setFirstName(customer.getFirstName());
-        customerDto.setLastName(customer.getLastName());
-        customerDto.setEmail(customer.getEmail());
-        return customerDto;
     }
 }

@@ -14,7 +14,15 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "order_date")
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToOne
+    @JoinColumn(name = "shipping_address_id")
+    private CustomerAddress customerAddress;
+
+    @Column(name = "order_date", insertable = false, updatable = false)
     private Date orderDate;
 
     @Column(name = "delivery_date")
@@ -46,6 +54,19 @@ public class Order {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    public CustomerAddress getCustomerAddress() {
+        return customerAddress;
+    }
+    public void setCustomerAddress(CustomerAddress customerAddress) {
+        this.customerAddress = customerAddress;
     }
 
 }

@@ -1,9 +1,5 @@
 package fi.metropolia.samuelms.Spring_API.dto;
 
-import fi.metropolia.samuelms.Spring_API.entities.Category;
-
-import java.math.BigDecimal;
-
 public class ProductDto {
 
     private int id;
@@ -11,7 +7,7 @@ public class ProductDto {
     private String description;
     private Double price;
     private Integer stockQuantity;
-    private Category category;
+    private CategoryDto category;
 
     public int getId() {
         return id;
@@ -43,10 +39,10 @@ public class ProductDto {
     public void setStockQuantity(Integer stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
-    public Category getCategory() {
+    public CategoryDto getCategory() {
         return category;
     }
-    public void setCategory(Category category) {
+    public void setCategory(CategoryDto category) {
         this.category = category;
     }
 }

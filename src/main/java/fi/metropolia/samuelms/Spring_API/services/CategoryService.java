@@ -5,6 +5,7 @@ import fi.metropolia.samuelms.Spring_API.entities.Category;
 import fi.metropolia.samuelms.Spring_API.exceptions.ResourceAlreadyExistsException;
 import fi.metropolia.samuelms.Spring_API.exceptions.ResourceNotFoundException;
 import fi.metropolia.samuelms.Spring_API.repositories.CategoryRepository;
+import fi.metropolia.samuelms.Spring_API.utils.CategoryMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +23,7 @@ public class CategoryService {
         }
 
         Category saved = categoryRepository.save(category);
-        return mapToDto(saved);
+        return CategoryMapper.toDto(saved);
     }
 
     public void deleteCategory(Integer id) {
@@ -34,14 +35,6 @@ public class CategoryService {
     public CategoryDto getCategoryById(Integer id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
-        return mapToDto(category);
-    }
-
-    private CategoryDto mapToDto(Category category) {
-        CategoryDto dto = new CategoryDto();
-        dto.setId(category.getId());
-        dto.setName(category.getName());
-        dto.setDescription(category.getDescription());
-        return dto;
+        return CategoryMapper.toDto(category);
     }
 }
